@@ -1,2 +1,3 @@
 # notes
-Notes about software that I use
+
+Notes about software that I use.
