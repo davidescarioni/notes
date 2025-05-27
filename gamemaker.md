@@ -2,11 +2,11 @@
 
 ## Funzioni
 
-## approach()
+### approach()
 
 Autore perso nella notte dei tempi (personalmente l'ho preso da [un video di Sara Spalding](https://youtu.be/2FroAhEsuE8)), serve per raggiungere un valore pian piano, una sorta di "lerp".
 
-```GML
+```JavaScript
 /// approach(_a, _b, _amount)
 // Moves "a" towards "b" by "amount" and returns the result
 // Nice bcause it will not overshoot "b", and works in both directions
@@ -31,11 +31,11 @@ function approach(_a, _b, _amount) {
 }
 ```
 
-## wave()
+### wave()
 
 Autore perso nella notte dei tempi (personalmente l'ho preso da [un video di Sara Spalding](https://youtu.be/2FroAhEsuE8)), serve per cambiare un valore in maniera sinusoidale.
 
-```GML
+```JavaScript
 //wave(from, to, duration, offset)
 // Returns a value that will wave back and forth between [from-to] over [duration] seconds
 // Examples
@@ -52,16 +52,15 @@ function wave(from, to, duration, offset) {
 }
 ```
 
-## lerp_offset()
+### lerp_offset()
 
 Funzione di lerp tra due valori nel quale è possibile aggiungere un offset per rendere più facile e veloce raggiungere il valore finale
 
 //lerp_offset(_from,_to,_amount,_offset)
 // Uses lerp between two values, but *_offset* is added to the difference, making it easier to reach final value
 
-```GML
-function lerp_offset(_from,_to,_amount,_offset = 1)
-{
+```JavaScript
+function lerp_offset(_from,_to,_amount,_offset = 1) {
     var _diff =_to - _from;
     var _diff_sign = sign(_diff);
     if _diff_sign == 0
@@ -70,4 +69,37 @@ function lerp_offset(_from,_to,_amount,_offset = 1)
     _diff *= _diff_sign;
     return _from + _diff_sign * min((_diff + _offset) * _amount, _diff);
 }
+```
+
+### is_mouse_hover()
+
+Verifico se il mouse è in hover sull'istanza
+
+```JavaScript
+function is_mouse_hover() {
+    var _mouse_x = mouse_x;
+    var _mouse_y = mouse_y;
+
+    if (point_in_rectangle(_mouse_x, _mouse_y, bbox_left, bbox_top, bbox_right, bbox_bottom)) {
+        return true
+    } else {
+        return false;
+    }
+}
+```
+
+## Pattern
+
+### Cambiare dolcemente un valore in base ad un booleano
+
+```JavaScript
+/// CREATE EVENT
+grow = 0;
+selected = false;
+
+/// STEP EVENT
+grow = lerp(grow, selected, .1);
+
+/// DRAW (EXAMPLE)
+draw_sprite_ext(sprite_index, image_index, x, y, 1+grow, 1+grow, 0+grow*45, c_white, 1)
 ```
