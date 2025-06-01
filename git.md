@@ -35,9 +35,9 @@ git branch -a --merged nomebranch***
 
 ## Pattern
 
-## Aggiungere file ad un commit passato
+## Aggiungere file ad un commit locale passato
 
-**Nota:** Fare attenzione a non modificare o rimuovere file che non esistevano al tempo del commit con cui vogliamo interagire
+**Nota:** Fare attenzione a non modificare o rimuovere file che non esistevano al tempo del commit con cui vogliamo interagire. Assicurarsi che il commit sia locale e non remoto
 
 Stashare i file da committare:
 `git stash`
