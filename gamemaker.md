@@ -103,3 +103,93 @@ grow = lerp(grow, selected, .1);
 /// DRAW (EXAMPLE)
 draw_sprite_ext(sprite_index, image_index, x, y, 1+grow, 1+grow, 0+grow*45, c_white, 1)
 ```
+
+### Screenshake
+
+- Creare un Effect Layer chiamato "Screenshake" con Effect Type "Screenshake". Settare la *magnitude* a 0;
+- Creare un oggetto *obj_shreenshake*
+
+```JavaScript
+/// CREATE EVENT
+spd = .1;
+mag = 1;
+
+fxl = layer_get_fx("Screenshake");
+
+/// STEP EVENT
+if ( layer_exists("Screenshake") ) {
+    mag = lerp(mag, 0, spd);
+    fx_set_parameter(fxl, "g_Magnitude", mag);
+    if ( mag <= 0.05 ) instance_destroy();
+}
+```
+
+A questo punto è possibile richiamare l'effetto con ad esempio uno script del genere
+
+```JavaScript
+function screen_shake(magnitude) {
+    var ins = instance_create_depth(0,0,depth,obj_screenshake);
+    ins.mag = magnitude;
+}
+```
+
+### Particelle in sospensione
+
+```JavaScript
+/// CREATE EVENT
+psys = part_system_create();
+p_type = part_type_create();
+
+part_type_direction(p_type, 0, 360, .5, 10);
+part_type_speed(p_type, .01, .2, 0, 0);
+part_type_alpha3(p_type, 0, 1, 0);
+part_type_color3(p_type, c_lime, c_yellow, c_red);
+part_type_life(p_type, 240, 600);
+
+repeat(10) {
+    part_particles_create(psys, random(room_width), random(room_height), p_type, 1);
+}
+
+/// STEP EVENT
+if ( irandom_range(-3, 1) ) { // Ho 4 probabilità su 5 che venga create una particella
+    part_particles_create(psys, random(room_width), random(room_height), p_type, 1);
+}
+
+// CLEAN UP EVENT
+part_type_destroy(p_type);
+part_system_destroy(psys);
+```
+
+### Ombra in un top down
+
+Nota: è utile creare un oggetto *obj_render* che si occupi di tutte le ombre degli oggetti
+
+```JavaScript
+with (obj_player) { // Esempio nel caso in cui si voglia crreare l'oggetto di supporto di cui sopra
+    draw_sprite_ext(sprite_index, image_index, x, y, .5, 1, -90, c_black, .15);
+}
+```
+
+### Pausa con screenshot
+
+Creare un *obj_pause* che si occuperà di tutto
+
+```JavaScript
+/// CREATE EVENT
+pause = false;
+spr_view = -1;
+
+/// STEP EVENT
+if (keyboard_check_released(vk_escape)) {
+    pause = !pause;
+
+    if (pause) {
+        spr_view = sprite_create_from_surface(application_surface, 0, 0, view_wport[0], view_hport[0], false, false, 0, 0)
+        instance_deactivate_all(true)
+    } else {
+        instance_activate_all();
+    }
+}
+
+/// DRAW GUI EVENT
+```
