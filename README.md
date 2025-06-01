@@ -1,3 +1,6 @@
 # notes
 
-Notes about software that I use.
+Appunti personali sui software che uso
+
+- [GameMaker](./gamemaker.md)
+- [Git](./git.md)
