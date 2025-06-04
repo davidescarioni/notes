@@ -88,6 +88,43 @@ function is_mouse_hover() {
 }
 ```
 
+### unstuck_player()
+
+Script sviluppato dal buon Willshire per evitare i problemi di compenetrazione tra oggetti
+
+```JavaScript
+function unstuck_player() {
+    item = obj_solid_parent; // oggetto parent dei solidi
+    if instance_place(x,y,item) {
+        var _ii = instance_place(x,y,item)
+        if x > _ii.bbox_right {
+            if (bbox_left <= _ii.bbox_right) {
+                // Lascio commentato, ma è utile da tenere nel caso si voglia mostrare a schermo in quali elementi ci si incastra
+                // _ii.image_blend = c_red
+                x += 1;
+            }
+        }
+        if x < _ii.bbox_left {
+            if (bbox_right >= _ii.bbox_left) {
+                // _ii.image_blend = c_red;
+                x -= 1;
+            }
+        }
+        if bbox_top < _ii.bbox_top {
+            if (bbox_bottom >= _ii.bbox_top) {
+                // _ii.image_blend = c_red
+                y -= 1;
+            }
+        }
+        if bbox_bottom > _ii.bbox_bottom {
+            if (bbox_top <= _ii.bbox_bottom) {
+                // _ii.image_blend = c_red
+                y += 1;
+            }
+        }
+    }
+```
+
 ## Pattern
 
 ### Cambiare dolcemente un valore in base ad un booleano
