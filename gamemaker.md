@@ -229,4 +229,76 @@ if (keyboard_check_released(vk_escape)) {
 }
 
 /// DRAW GUI EVENT
+if (pause) {
+    draw_sprite(spr_view, 0, 0, 0);
+    draw_set_halign(fa_center);
+    draw_set_valign(fa_middle);
+    draw_text(view_wport / 2, view_hport / 2, "--PAUSE--");
+}
+```
+
+### Dash
+
+Viene tutto gestito all'interno di obj_player, tranne per la scia che sarà dentro ad un obj_dash_trail. La gestione è fatta tramite macchina a stati
+
+In *obj_player*
+
+```JavaScript
+/// CREATE EVENT
+can_dash = true;
+dash_distance = 30;
+dash_time = 10;
+dash_direction = 0;
+dash_speed = 0;
+dash_energy = 0;
+dash_color = c_olive;
+
+/// STEP EVENT
+if (state == PLAYER_STATES.DASH) {
+    hsp = lengthdir_x(dash_speed, dash_direction);
+
+    // Draw Trail
+    with (instance_create_depth(x, y, depth+1, obj_dash_trail)) {
+        sprite_index = other.sprite_index;
+        image_blend = other.dash_color;
+        image_alpha = .7;
+    }
+
+    vsp = lengthdir_y(dash_speed, dash_direction);
+
+    // Ending the dash
+    dash_energy -= dash_speed;
+
+    if (dash_energy <= 0) {
+    state = PLAYER_STATES.NORMAL
+    }
+}
+
+if (_key_dash && can_dash) {
+    can_dash = false;
+    can_jump = 0;
+                    
+    // Avoid dashing right if I don't press any arrow key
+    if (_key_left || _key_right || _key_down || _key_up) {
+        dash_direction = point_direction(0, 0,  _key_right-_key_left, _key_down - _key_up)
+    } else {
+        dash_direction = (dir * 90) - 90;
+    }
+                    
+    var _ds = dash_distance / dash_time;
+    dash_speed = _ds;
+    dash_energy = dash_distance;
+    state = PLAYER_STATES.DASH;
+}
+```
+
+Ricorda di settare **can_dash = true** dove metti il controllo se il personaggio è sul terreno.
+
+In *obj_dash_trail*
+
+```JavaScript
+/// STEP EVENT
+image_alpha-=.1;
+
+if (image_alpha <= 0) instance_destroy();
 ```
