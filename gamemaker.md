@@ -1,5 +1,14 @@
 # GameMaker
 
+Sommario:
+
+- Funzioni
+  - [approach()](#approach)
+  - [wave()](#wave)
+  - [lerp_offset()](#lerp_offset)
+  - [is_mouse_hover()](#is_mouse_hover)
+  - [unstuck_player()](#unstuck_player)
+
 ## Funzioni
 
 ### approach()
@@ -56,10 +65,9 @@ function wave(from, to, duration, offset) {
 
 Funzione di lerp tra due valori nel quale è possibile aggiungere un offset per rendere più facile e veloce raggiungere il valore finale
 
+```JavaScript
 //lerp_offset(_from,_to,_amount,_offset)
 // Uses lerp between two values, but *_offset* is added to the difference, making it easier to reach final value
-
-```JavaScript
 function lerp_offset(_from,_to,_amount,_offset = 1) {
     var _diff =_to - _from;
     var _diff_sign = sign(_diff);
