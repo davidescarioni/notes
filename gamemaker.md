@@ -2,12 +2,20 @@
 
 Sommario:
 
-- Funzioni
+- [Funzioni](#funzioni)
   - [approach()](#approach)
   - [wave()](#wave)
   - [lerp_offset()](#lerp_offset)
   - [is_mouse_hover()](#is_mouse_hover)
   - [unstuck_player()](#unstuck_player)
+- [Pattern](#pattern)
+  - [Cambiare dolcemente un valore in base ad un booleano](#cambiare-dolcemente-un-valore-in-base-ad-un-booleano)
+  - [Screenshake](#screenshake)
+  - [Particelle in sospensione](#particelle-in-sospensione)
+  - [Ombra in un top down](#ombra-in-un-top-down)
+  - [Pausa con screenshot](#pausa-con-screenshot)
+  - [Dash](#dash)
+  - [Mantenere l'ultima image di uno sprite se è finita l'animazione](#mantenere-lultima-image-di-uno-sprite-se-è-finita-lanimazione)
 
 ## Funzioni
 
@@ -207,6 +215,7 @@ part_system_destroy(psys);
 
 ### Ombra in un top down
 
+Esempio preso da Forgodden.
 Nota: è utile creare un oggetto *obj_render* che si occupi di tutte le ombre degli oggetti
 
 ```JavaScript
