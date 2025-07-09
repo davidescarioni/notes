@@ -329,3 +329,25 @@ if (image_index >= image_number - 1) {
     image_index = image_number - 1;
 }
 ```
+
+### Sprite Stacking semplice
+
+```JavaScript
+/// DRAW EVENT
+for (var _i = 0; _i < image_number ; _i++) {
+    draw_sprite_ext(sprite_index, _i, x, y - _i, image_xscale, image_yscale, image_angle, image_blend, image_alpha)
+}
+```
+
+### Dare un'effetto pixelato al nostro gioco
+
+Preso dal tutorial sullo sprite stacking di Matharoo.
+Data una *camera* di dimensione 384x216, che poi viene presumibilmente stretchata cambiando la viewport di un suo multiplo, scrivere questo nel CREATE event di chi gestisce la *camera*
+
+```JavaScript
+/// CREATE EVENT
+cam_w = 384;
+cam_h = 216;
+
+surface_resize(application_surface, cam_w, cam_h);
+```
