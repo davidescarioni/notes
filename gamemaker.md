@@ -2,6 +2,8 @@
 
 Sommario:
 
+- [Informazioni utili](#informazioni-utili)
+  - [Risoluzione](#risoluzione)
 - [Funzioni](#funzioni)
   - [approach()](#approach)
   - [wave()](#wave)
@@ -16,6 +18,13 @@ Sommario:
   - [Pausa con screenshot](#pausa-con-screenshot)
   - [Dash](#dash)
   - [Mantenere l'ultima image di uno sprite se è finita l'animazione](#mantenere-lultima-image-di-uno-sprite-se-è-finita-lanimazione)
+
+## Informazioni utili
+
+### Risoluzione
+
+Sara (Shaun) Spalding consiglia come risoluzione per un gioco pixel art 320x180, essendo una risoluzione in 16:9 facilmente scalabile.
+Altre risoluzioni consigliate e perfettamente scalabili possono essere trovate [qui](https://pacoup.com/2011/06/12/list-of-true-169-resolutions/). 
 
 ## Funzioni
 
