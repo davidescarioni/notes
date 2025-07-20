@@ -11,6 +11,7 @@ Sommario:
   - [is_mouse_hover()](#is_mouse_hover)
   - [unstuck_player()](#unstuck_player)
 - [Pattern](#pattern)
+  - [Semplice effetto di tweening](#semplice-effetto-di-tweening)
   - [Cambiare dolcemente un valore in base ad un booleano](#cambiare-dolcemente-un-valore-in-base-ad-un-booleano)
   - [Screenshake](#screenshake)
   - [Particelle in sospensione](#particelle-in-sospensione)
@@ -18,6 +19,9 @@ Sommario:
   - [Pausa con screenshot](#pausa-con-screenshot)
   - [Dash](#dash)
   - [Mantenere l'ultima image di uno sprite se è finita l'animazione](#mantenere-lultima-image-di-uno-sprite-se-è-finita-lanimazione)
+  - [Sprite Stacking semplice](#sprite-stacking-semplice)
+  - [Dare un'effetto pixelato al nostro gioco](#dare-uneffetto-pixelato-al-nostro-gioco)
+  - [Movimento in 8 direzioni](#movimento-in-8-direzioni)
 
 ## Informazioni utili
 
@@ -151,6 +155,13 @@ function unstuck_player() {
 ```
 
 ## Pattern
+
+### Semplice effetto di tweening
+
+```JavaScript
+/// STEP EVENT
+lerp_progress += (1 - lerp_progress) / 50;
+```
 
 ### Cambiare dolcemente un valore in base ad un booleano
 
@@ -359,4 +370,19 @@ cam_w = 384;
 cam_h = 216;
 
 surface_resize(application_surface, cam_w, cam_h);
+```
+
+### Movimento in 8 direzioni
+
+```JavaScript
+/// STEP EVENT
+var _input_direction = point_direction(0, 0, _key_right - _key_left, _key_down - _key_up);
+var _input_magnitude = (_key_right - _key_left != 0) || (_key_down - _key_up != 0);
+
+// Movement
+hsp = lengthdir_x(_input_magnitude * spd_walk, _input_direction);
+vsp = lengthdir_y(_input_magnitude * spd_walk, _input_direction);
+
+x+=hsp;
+y+=vsp;
 ```
