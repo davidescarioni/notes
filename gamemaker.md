@@ -11,6 +11,7 @@ Sommario:
   - [is_mouse_hover()](#is_mouse_hover)
   - [unstuck_player()](#unstuck_player)
 - [Pattern](#pattern)
+  - [Valorizzare variable definition in fase di creazione di un oggetto](#valorizzare-variable-definition-in-fase-di-creazione-di-un-oggetto)
   - [Semplice effetto di tweening](#semplice-effetto-di-tweening)
   - [Cambiare dolcemente un valore in base ad un booleano](#cambiare-dolcemente-un-valore-in-base-ad-un-booleano)
   - [Screenshake](#screenshake)
@@ -156,11 +157,24 @@ function unstuck_player() {
 
 ## Pattern
 
+## Valorizzare variable definition in fase di creazione di un oggetto
+
+```JavaScript
+instance_create_layer(0, 0, "Instances", _obj, { message: _message, background: _background }))
+```
+
 ### Semplice effetto di tweening
 
 ```JavaScript
 /// STEP EVENT
 lerp_progress += (1 - lerp_progress) / 50;
+```
+
+oppure (preso dal tutorial Action RPG di Sara Spalding)
+
+```JavaScript
+/// STEP EVENT
+flash = max(flash-.04, 0);
 ```
 
 ### Cambiare dolcemente un valore in base ad un booleano
